@@ -1,4 +1,5 @@
 "use client";
+import DismissableAlert from "@/components/DismissableAlert";
 import { motion } from "motion/react";
 
 export default function Home() {
@@ -78,6 +79,7 @@ export default function Home() {
           <h3 className="p-2 rounded-2xl shadow-2xl">Ali</h3>
         </motion.div>
       </motion.div>
+      <DismissableAlert />
     </div>
   );
 }
