@@ -66,12 +66,17 @@ export default function Home() {
           </motion.ul>
         </div>
 
-        <div className="py-4 px-3 space-y-5 mt-5">
-          <h3>Abu Bakkar</h3>
-          <h3>Umar ibn </h3>
-          <h3>Hamza</h3>
-          <h3>Ali</h3>
-        </div>
+        <motion.div
+          className="py-4 px-3 space-y-5 mt-5"
+          drag
+          dragConstraints={{ left: -80, right: 80, top: -40, bottom: 40 }}
+          dragElastic={0.2}
+        >
+          <h3 className="p-2 rounded-2xl shadow-2xl">Abu Bakkar</h3>
+          <h3 className="p-2 rounded-2xl shadow-2xl">Umar ibn </h3>
+          <h3 className="p-2 rounded-2xl shadow-2xl">Hamza</h3>
+          <h3 className="p-2 rounded-2xl shadow-2xl">Ali</h3>
+        </motion.div>
       </motion.div>
     </div>
   );
