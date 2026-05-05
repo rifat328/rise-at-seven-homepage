@@ -2,6 +2,18 @@
 import { motion } from "motion/react";
 
 export default function Home() {
+  const feature = ["Fast", "Slow", "PowerFull", "Weak"];
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, ease: "easeIn" },
+    },
+  };
+  const items = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
   return (
     <div className="flex flex-1 justify-center items-center">
       <motion.div
@@ -35,6 +47,30 @@ export default function Home() {
           >
             Inertia animation
           </motion.button>
+        </div>
+        <div className="py-4 px-3 space-y-5 mt-5">
+          <motion.ul
+            variants={container}
+            initial={"hidden"}
+            animate={"visible"}
+          >
+            {feature.map((e) => (
+              <motion.li
+                key={e}
+                variants={items}
+                className="text-shadow-white font-medium"
+              >
+                {e}
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
+
+        <div className="py-4 px-3 space-y-5 mt-5">
+          <h3>Abu Bakkar</h3>
+          <h3>Umar ibn </h3>
+          <h3>Hamza</h3>
+          <h3>Ali</h3>
         </div>
       </motion.div>
     </div>
