@@ -1,4 +1,5 @@
 "use client";
+import CollapsibleList from "@/components/CollapsibleList";
 import DismissableAlert from "@/components/DismissableAlert";
 import { motion } from "motion/react";
 
@@ -68,7 +69,7 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="py-4 px-3 space-y-5 mt-5"
+          className="py-2 px-3  mt-5"
           drag
           dragConstraints={{ left: -80, right: 80, top: -40, bottom: 40 }}
           dragElastic={0.2}
@@ -78,8 +79,10 @@ export default function Home() {
           <h3 className="p-2 rounded-2xl shadow-2xl">Hamza</h3>
           <h3 className="p-2 rounded-2xl shadow-2xl">Ali</h3>
         </motion.div>
+
+        <DismissableAlert />
+        <CollapsibleList />
       </motion.div>
-      <DismissableAlert />
     </div>
   );
 }
