@@ -1,6 +1,7 @@
 "use client";
 import CollapsibleList from "@/components/CollapsibleList";
 import DismissableAlert from "@/components/DismissableAlert";
+import LiveBadge from "@/components/LiveBadge";
 import { motion } from "motion/react";
 
 export default function Home() {
@@ -67,7 +68,7 @@ export default function Home() {
             ))}
           </motion.ul>
         </div>
-
+        <LiveBadge />
         <motion.div
           className="py-2 px-3  mt-5"
           drag
