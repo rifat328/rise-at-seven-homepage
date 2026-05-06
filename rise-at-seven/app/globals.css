@@ -6,6 +6,7 @@
 }
 
 @theme inline {
+  --font-saans: var(--font-saans), sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
