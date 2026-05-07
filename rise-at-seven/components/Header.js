@@ -3,7 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Logo from "./Logo";
-import { CircleChevronDown, CircleChevronUp } from "lucide-react";
+import { CircleChevronDown, CircleChevronUp, MoveUpRight } from "lucide-react";
+import { IoCloseOutline } from "react-icons/io5";
+import { TbMenu } from "react-icons/tb";
 import ChevronIcon from "./ChevronIcon";
 gsap.registerPlugin(useGSAP);
 
@@ -97,12 +99,12 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
   }, [isOpen]);
 
   return (
-    <div className="py-2">
+    <div className="">
       <button
         onClick={toggleOpen}
         className="w-full flex justify-between items-center text-3xl font-bold focus:outline-none"
       >
-        <div className="flex items-center">
+        <div className="flex items-center font-medium text-4xl text-white leading-none">
           {item.label}
           {item.badge && (
             <span className="hidden lg:block bg-emerald-400 text-black text-xs font-bold px-2 py-1 rounded-full relative -top-2">
@@ -112,7 +114,7 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
         </div>
         {item.sub && (
           <div ref={iconRef}>
-            <ChevronIcon className="w-5 h-5 text-gray-400" />
+            <CircleChevronDown strokeWidth={1} className="text-white" />
           </div>
         )}
       </button>
@@ -120,9 +122,13 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
       {/* Accordion Content Container */}
       <div ref={contentRef} className="overflow-hidden h-0">
         {item.sub && (
-          <div className="flex flex-col gap-4 mt-6 mb-2 pl-4 border-l border-gray-800">
+          <div className="flex flex-col  mt-4 mb-2">
             {item.sub.map((subLink, idx) => (
-              <a key={idx} href="#" className="text-xl text-gray-400 ">
+              <a
+                key={idx}
+                href="#"
+                className="text-xl font-semibold text-white  "
+              >
                 {subLink}
               </a>
             ))}
@@ -157,36 +163,36 @@ const Header = () => {
     <>
       {/* 1. Global Blur Overlay (Appears on Desktop Hover) */}
       {activeDropdown && !isMobileOpen && (
-        <div className="fixed inset-0 z-30 backdrop-blur-md  transition-all duration-300 bg-white/90 border border-white/80 bg-transparent " />
+        <div className="fixed inset-0 z-30 backdrop-blur-lg  transition-all duration-300  border border-white/80 bg-transparent " />
       )}
 
       {/* 2. Main Header Bar */}
       <header
-        className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] py-5  z-50 
-  flex justify-between items-center p-2 px-6 rounded-full
-      /* Glassmorphism Logic */
-  bg-white/5 backdrop-blur-md 
-  border border-white/10 shadow-lg 
-   text-white transition-all duration-300 mix-blend-difference"
+        className=" font-light fixed top-4 left-1/2 -translate-x-1/2 w-[95%] py-5  z-50 
+            flex justify-between items-center p-2 px-6 rounded-full
+            /* Glassmorphism Logic */
+             bg-white/5 backdrop-blur-md 
+                border border-white/10 shadow-lg 
+                 text-[#111212] transition-all duration-300  "
       >
-        <div className="w-32 z-50 relative">
+        <div className="w-40 z-50 relative">
           <Logo />
         </div>
 
-        {/* Desktop Nav - Hidden on Mobile */}
+        {/* //! Desktop Nav - Hidden on Mobile */}
         <nav
-          className="hidden md:flex gap-8 items-center"
+          className="hidden lg:flex gap-8 items-center"
           onMouseLeave={() => setActiveDropdown(null)}
         >
           {NAV_ITEMS.map((item) => (
             <div key={item.key} className="relative">
               <button
                 onMouseEnter={() => setActiveDropdown(item.key)}
-                className="hover:text-gray-300 font-medium flex items-center gap-1"
+                className="text-base font-medium flex items-center gap-2 leading-relaxed"
               >
                 {item.label} {item.sub && "+"}
                 {item.badge && (
-                  <span className="bg-emerald-400 text-black text-[10px] px-1.5 py-0.5 rounded-full absolute -top-3 -right-4">
+                  <span className="bg-emerald-200 text-black text-[10px] px-1.5 py-0.5 rounded-full absolute -top-3 -right-4">
                     {item.badge}
                   </span>
                 )}
@@ -194,20 +200,23 @@ const Header = () => {
             </div>
           ))}
 
-          {/* Desktop Mega Menu Dropdown */}
+          {/* //! Desktop Mega Menu Dropdown */}
           {activeDesktopData && activeDesktopData.sub && (
             <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[900px] bg-white text-black p-8 rounded-2xl shadow-xl flex gap-12 cursor-default">
               {/* Left side: Links list */}
               <div className="flex-1">
-                <p className="text-gray-500 text-sm font-semibold mb-6">
-                  {activeDesktopData.dropdownLabel}
-                </p>
-                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                {activeDesktopData.dropdownLabel && (
+                  <p className="text-gray-500 text-sm font-normal mb-2">
+                    {activeDesktopData.dropdownLabel}
+                  </p>
+                )}
+
+                <div className="grid grid-cols-2 gap-y-1 gap-x-2">
                   {activeDesktopData.sub.map((subLink, idx) => (
                     <a
                       key={idx}
                       href="#"
-                      className="font-bold hover:text-gray-600 transition-colors"
+                      className="font-medium  text-[22px] leading-7"
                     >
                       {subLink}
                     </a>
@@ -221,9 +230,11 @@ const Header = () => {
                   alt={activeDesktopData.imgAlt}
                   className="object-cover w-full h-full"
                 />
-                <button className="absolute bottom-4 left-4 bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">
-                  {activeDesktopData.ctaLabel} ↗
-                </button>
+                {activeDesktopData.ctaLabel && (
+                  <button className="absolute bottom-4 left-4 bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">
+                    {activeDesktopData.ctaLabel} ↗
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -234,13 +245,17 @@ const Header = () => {
           className="md:hidden z-50 relative text-sm font-bold uppercase tracking-widest"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
-          {isMobileOpen ? "Close" : "Menu"}
+          {isMobileOpen ? (
+            <IoCloseOutline size={28} className=" text-background" />
+          ) : (
+            <TbMenu size={28} />
+          )}
         </button>
       </header>
 
       {/* 3. Mobile Full-Screen Menu */}
       {isMobileOpen && (
-        <div className="fixed inset-0 z-40 bg-[#111] text-white p-6 pt-28 flex flex-col overflow-y-auto">
+        <div className="fixed inset-0 z-40 m-2 rounded-3xl bg-[#111]/90 text-background p-6 pt-28 flex flex-col overflow-y-auto backdrop-blur-sm ">
           <div className="flex-1 flex flex-col mb-10">
             {NAV_ITEMS.map((item) =>
               item.sub ? (
@@ -258,10 +273,10 @@ const Header = () => {
                 <a
                   key={item.key}
                   href="#"
-                  className="border-b border-gray-800 py-4 text-3xl font-bold flex items-center gap-3"
+                  className="  text-4xl font-medium leading-none flex items-center gap-3"
                 >
                   {item.label}
-                  {item.badge && (
+                  {item.badge && !isMobileOpen && (
                     <span className="bg-emerald-400 text-black text-xs px-2 py-1 rounded-full relative -top-2">
                       {item.badge}
                     </span>
@@ -271,8 +286,15 @@ const Header = () => {
             )}
           </div>
 
-          <button className="mt-auto bg-white text-black py-4 rounded-full font-bold w-full text-lg">
-            Get In Touch ↗
+          <button className="w-full py-2 mt-auto bg-background text-sub-navigation font-medium text-base rounded-full flex items-center justify-center gap-2">
+            Get In Touch{" "}
+            <span>
+              <MoveUpRight
+                strokeWidth={2}
+                size={16}
+                className="text-sub-navigation"
+              />
+            </span>
           </button>
         </div>
       )}
