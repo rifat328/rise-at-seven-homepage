@@ -51,7 +51,7 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
         onClick={toggleOpen}
         className="w-full flex justify-between items-center text-3xl font-bold focus:outline-none"
       >
-        <div className="flex items-center font-medium text-4xl text-white leading-none">
+        <div className="flex items-center font-medium text-4xl md:text-5xl text-background leading-none">
           {item.label}
           {item.badge && (
             <span className="hidden lg:block bg-emerald-400 text-black text-xs font-bold px-2 py-1 rounded-full relative -top-2">
@@ -61,7 +61,10 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
         </div>
         {item.sub && (
           <div ref={iconRef}>
-            <CircleChevronDown strokeWidth={1} className="text-white" />
+            <CircleChevronDown
+              strokeWidth={1}
+              className="w-6 h-6 md:w-7 md:h-7 text-background"
+            />
           </div>
         )}
       </button>
@@ -74,7 +77,7 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
               <a
                 key={idx}
                 href="#"
-                className="text-xl font-semibold text-white  "
+                className="text-xl font-medium text-background   "
               >
                 {subLink}
               </a>
@@ -264,7 +267,15 @@ const Header = () => {
 
       {/* 3. Mobile Full-Screen Menu */}
       {isMobileOpen && (
-        <div className="fixed inset-0 z-40 m-2 rounded-3xl bg-[#111]/90 text-background p-6 pt-28 flex flex-col overflow-y-auto backdrop-blur-sm ">
+        <div className="fixed inset-0 z-50 m-2 rounded-3xl bg-[#111]/90 text-background p-6 pt-3 flex flex-col overflow-y-auto backdrop-blur-md  ">
+          <div className="upper-navigation flex  justify-between items-center w-full mb-11">
+            <div className="sm:w-40 md:w-44">
+              <Logo />
+            </div>
+            <button onClick={() => setIsMobileOpen((prev) => !prev)}>
+              <IoCloseOutline className="w-7 h-7 md:w-10 md:h-10" />
+            </button>
+          </div>
           <div className="flex-1 flex flex-col mb-10">
             {NAV_ITEMS.map((item) =>
               item.sub ? (
@@ -282,7 +293,7 @@ const Header = () => {
                 <a
                   key={item.key}
                   href="#"
-                  className="  text-4xl font-medium leading-none flex items-center gap-3"
+                  className="  text-4xl md:text-5xl font-medium leading-none flex items-center gap-3"
                 >
                   {item.label}
                   {item.badge && !isMobileOpen && (
