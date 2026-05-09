@@ -115,7 +115,7 @@ const Header = () => {
         })
         .progress(1); // Set it to "shown" state immediately
 
-      gsap.set(headerRef.current, { top: "35px" });
+      gsap.set(headerRef.current, { top: "55px" });
       // 2. INITIAL POSITION (Prevent overlap on page load)
       // h-14 is 56px. We set the header to start at 70px to clear the banner
 
@@ -138,7 +138,7 @@ const Header = () => {
           if (scrollAmount <= BANNER_PIXELS) {
             // We are still seeing the banner: stay pushed down
             gsap.to(headerRef.current, {
-              top: "35px",
+              top: "55px",
               duration: 0.2,
               overwrite: "auto",
             });
@@ -170,7 +170,7 @@ const Header = () => {
       {/* 2. Main Header Bar */}
       <header
         ref={headerRef}
-        className=" font-light fixed inset-x-0 mx-auto w-[98%] py-4 z-50 
+        className=" font-light fixed inset-x-0 mx-auto w-[98%] py-3 z-50 
              flex justify-between items-center p-2 px-6 rounded-full
              bg-white/5 backdrop-blur-md border border-white/10 shadow-lg 
              text-[#111212]  "
