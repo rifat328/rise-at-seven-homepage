@@ -1,70 +1,17 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Logo from "./Logo";
 import { CircleChevronDown, CircleChevronUp, MoveUpRight } from "lucide-react";
 import { IoCloseOutline } from "react-icons/io5";
 import { TbMenu } from "react-icons/tb";
 import ChevronIcon from "./ChevronIcon";
-gsap.registerPlugin(useGSAP);
+import Button from "@/components/Button";
+import { NAV_ITEMS } from "@/utils/navItems";
 
-const NAV_ITEMS = [
-  {
-    label: "Services",
-    key: "services",
-    sub: [
-      "Search & Growth Strategy",
-      "Digital PR",
-      "Onsite SEO",
-      "Social Media & Campaigns",
-      "Content Experience",
-      "Data & Insights",
-      "B2B Marketing",
-      "Social SEO/Search",
-    ],
-    dropdownLabel: "Core Services",
-    ctaLabel: "View All Services",
-    imgAlt: "The Rise Lounge",
-    imgSrc: "/images/rise-lounge.jpg",
-  },
-  {
-    label: "Industries",
-    key: "industries",
-    sub: ["B2B Marketing"],
-    dropdownLabel: "Industries We Serve",
-    ctaLabel: "View All Industries",
-    imgAlt: "Industries",
-    imgSrc: "/images/industries.jpg",
-  },
-  {
-    label: "International",
-    key: "international",
-    sub: [
-      "US Digital PR",
-      "Spain Digital PR",
-      "Germany Digital PR",
-      "Netherlands Digital PR",
-    ],
-    dropdownLabel: "Global Reach",
-    ctaLabel: "Go Global",
-    imgAlt: "International",
-    imgSrc: "/images/international.jpg",
-  },
-  {
-    label: "About",
-    key: "about",
-    sub: ["About Us", "Meet The Risers", "Culture", "Testimonials"],
-    dropdownLabel: "About Rise at Seven",
-    ctaLabel: "Learn More",
-    imgAlt: "The Team",
-    imgSrc: "/images/team.jpg",
-  },
-  { label: "Work", key: "work", badge: "25" },
-  { label: "Careers", key: "careers" },
-  { label: "Blog & Resources", key: "blog" },
-  { label: "Webinar", key: "webinar" },
-];
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // --- Mobile Accordion Sub-Component ---
 const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
@@ -144,7 +91,7 @@ const Header = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [openMobileKey, setOpenMobileKey] = useState(null); // Tracks which accordion is open
-
+  const headerRef = useRef(null);
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileOpen) {
@@ -154,6 +101,44 @@ const Header = () => {
       setOpenMobileKey(null); // Reset accordions when closing menu
     }
   }, [isMobileOpen]);
+
+  // Animations for header visibility
+  useGSAP(
+    () => {
+      // show/hide animation
+      const showAnim = gsap
+        .from(headerRef.current, {
+          yPercent: -200, // Moves it way off screen
+          paused: true,
+          duration: 0.3,
+          ease: "power2.out",
+        })
+        .progress(1); // Set it to "shown" state immediately
+
+      // ScrollTrigger to toggle that animation
+      ScrollTrigger.create({
+        start: "top top",
+        end: "max",
+        onUpdate: (self) => {
+          // self.direction: 1 is scrolling down, -1 is scrolling up
+          if (self.direction === 1) {
+            showAnim.reverse(); // Hide
+          } else {
+            showAnim.play(); // Show
+          }
+          // 2. Dynamic Top Position Logic
+          // If we have scrolled more than 50px, move header to top-4
+          // Otherwise, move it down to make room for the banner (top-7)
+          if (self.scroll() > 50) {
+            gsap.to(headerRef.current, { top: "0.25rem", duration: 0.3 });
+          } else {
+            gsap.to(headerRef.current, { top: "0.438rem", duration: 0.3 });
+          }
+        },
+      });
+    },
+    { scope: headerRef },
+  );
 
   const activeDesktopData = NAV_ITEMS.find(
     (item) => item.key === activeDropdown,
@@ -168,12 +153,11 @@ const Header = () => {
 
       {/* 2. Main Header Bar */}
       <header
-        className=" font-light fixed top-4 left-1/2 -translate-x-1/2 w-[95%] py-5  z-50 
-            flex justify-between items-center p-2 px-6 rounded-full
-            /* Glassmorphism Logic */
-             bg-white/5 backdrop-blur-md 
-                border border-white/10 shadow-lg 
-                 text-[#111212] transition-all duration-300  "
+        ref={headerRef}
+        className=" font-light fixed top-7 inset-x-0 mx-auto w-[98%] py-4 z-50 
+                   flex justify-between items-center p-2 px-6 rounded-full
+                   bg-white/5 backdrop-blur-md border border-white/10 shadow-lg 
+                   text-[#111212] transition-all duration-300  "
       >
         <div className="w-40 z-50 relative">
           <Logo />
@@ -240,9 +224,18 @@ const Header = () => {
           )}
         </nav>
 
+        {/* Button only shows on Desktop here */}
+        <div className="hidden lg:block">
+          <Button
+            href="#"
+            classStyle=" font-medium py-2 px-4 flex items-center text-lg"
+          >
+            Get In Touch <MoveUpRight size={16} />
+          </Button>
+        </div>
         {/* Mobile Hamburger Button */}
         <button
-          className="md:hidden z-50 relative text-sm font-bold uppercase tracking-widest"
+          className="lg:hidden z-50 relative text-sm font-bold uppercase tracking-widest"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
           {isMobileOpen ? (
