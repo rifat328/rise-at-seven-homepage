@@ -108,31 +108,47 @@ const Header = () => {
       // show/hide animation
       const showAnim = gsap
         .from(headerRef.current, {
-          yPercent: -200, // Moves it way off screen
+          yPercent: -150, // Moves it way off screen
           paused: true,
           duration: 0.3,
           ease: "power2.out",
         })
         .progress(1); // Set it to "shown" state immediately
 
+      gsap.set(headerRef.current, { top: "35px" });
+      // 2. INITIAL POSITION (Prevent overlap on page load)
+      // h-14 is 56px. We set the header to start at 70px to clear the banner
+
       // ScrollTrigger to toggle that animation
       ScrollTrigger.create({
         start: "top top",
         end: "max",
         onUpdate: (self) => {
-          // self.direction: 1 is scrolling down, -1 is scrolling up
+          // A. Show/Hide Logic (always works on all sections)
           if (self.direction === 1) {
-            showAnim.reverse(); // Hide
+            showAnim.reverse();
           } else {
-            showAnim.play(); // Show
+            showAnim.play();
           }
-          // 2. Dynamic Top Position Logic
-          // If we have scrolled more than 50px, move header to top-4
-          // Otherwise, move it down to make room for the banner (top-7)
-          if (self.scroll() > 50) {
-            gsap.to(headerRef.current, { top: "0.25rem", duration: 0.3 });
+
+          // B. Dynamic Top Position (The Banner Fix)
+          const scrollAmount = self.scroll();
+          const BANNER_PIXELS = 56; // This is the actual pixel height of h-14
+
+          if (scrollAmount <= BANNER_PIXELS) {
+            // We are still seeing the banner: stay pushed down
+            gsap.to(headerRef.current, {
+              top: "35px",
+              duration: 0.2,
+              overwrite: "auto",
+            });
           } else {
-            gsap.to(headerRef.current, { top: "0.438rem", duration: 0.3 });
+            // We scrolled past the banner: float at the top
+            gsap.to(headerRef.current, {
+              top: "16px", // equivalent to 1rem
+              duration: 0.2,
+              overwrite: "auto",
+            });
           }
         },
       });
@@ -154,10 +170,10 @@ const Header = () => {
       {/* 2. Main Header Bar */}
       <header
         ref={headerRef}
-        className=" font-light fixed top-7 inset-x-0 mx-auto w-[98%] py-4 z-50 
-                   flex justify-between items-center p-2 px-6 rounded-full
-                   bg-white/5 backdrop-blur-md border border-white/10 shadow-lg 
-                   text-[#111212] transition-all duration-300  "
+        className=" font-light fixed inset-x-0 mx-auto w-[98%] py-4 z-50 
+             flex justify-between items-center p-2 px-6 rounded-full
+             bg-white/5 backdrop-blur-md border border-white/10 shadow-lg 
+             text-[#111212]  "
       >
         <div className="w-40 z-50 relative">
           <Logo />
