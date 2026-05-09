@@ -8,43 +8,36 @@ const Button = ({ classStyle, children, href }) => {
   const hoverRef = useRef(null);
   const tlRef = useRef(null);
 
-  // 1. Separate base layout from customizable styles
-  const baseClasses =
-    "bg-white border-2 inline-flex items-center cursor-pointer overflow-hidden relative";
-  const finalClass = classStyle
-    ? `${baseClasses} ${classStyle}`
-    : `${baseClasses} py-2 px-3`;
+  // 1. We move default colors into a variable that we only use if NOT provided in classStyle
+  const hasBg = classStyle?.includes("bg-");
+  const defaultColors = hasBg ? "" : "bg-white text-black";
+
+  const baseLayout =
+    "inline-flex items-center cursor-pointer overflow-hidden relative ";
+  const finalClass = `${baseLayout} ${defaultColors} ${classStyle || "py-2 px-3"}`;
 
   useLayoutEffect(() => {
-    // 2. Set initial GSAP states
+    // 2. Initial Pill State
+    // We use !important or GSAP set to ensure we override any 'rounded' classes passed in
     gsap.set(btnRef.current, { borderRadius: "999px" });
     gsap.set(hoverRef.current, { yPercent: 100 });
 
-    // 3. Create the timeline
     tlRef.current = gsap
       .timeline({ paused: true })
       .to(
         defaultRef.current,
-        {
-          yPercent: -100,
-          duration: 0.4,
-          ease: "power3.inOut",
-        },
+        { yPercent: -100, duration: 0.4, ease: "power3.inOut" },
         0,
       )
       .to(
         hoverRef.current,
-        {
-          yPercent: 0,
-          duration: 0.4,
-          ease: "power3.inOut",
-        },
+        { yPercent: 0, duration: 0.4, ease: "power3.inOut" },
         0,
       )
       .to(
         btnRef.current,
         {
-          borderRadius: "6px", // The "boxy" shape
+          borderRadius: "8px", // Your "boxy" target
           duration: 0.4,
           ease: "power3.inOut",
         },
@@ -65,15 +58,17 @@ const Button = ({ classStyle, children, href }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Inner container to hold the sliding text */}
-      <div className="relative flex items-center overflow-hidden">
-        <span ref={defaultRef} className="flex items-center gap-1.5">
+      <div className="relative flex items-center overflow-hidden w-full justify-center">
+        <span
+          ref={defaultRef}
+          className="flex items-center gap-1.5 whitespace-nowrap"
+        >
           {children}
         </span>
         <span
           ref={hoverRef}
           aria-hidden="true"
-          className="absolute left-0 top-0 flex items-center gap-1.5"
+          className="absolute flex items-center gap-1.5 whitespace-nowrap"
         >
           {children}
         </span>
