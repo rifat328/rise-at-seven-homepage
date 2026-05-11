@@ -1,18 +1,36 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import LeafLeft from "./LeafLeft";
 import LeafRight from "./LeafRight";
-import { heroIconsBottom } from "@/utils/navItems";
+import { heroIconsBottom, heroMainImage } from "@/utils/navItems";
 const Hero = () => {
   const heroFrontIconWidth = 35,
     heroFrontIconHeight = 20;
-
+  const [randomImage] = React.useState(
+    () => heroMainImage[Math.floor(Math.random() * heroMainImage.length)],
+  );
   return (
     <section
       aria-label="Hero section, top of the page"
       className="w-full h-[calc(100vh-66px)] p-2.5 flex flex-col"
     >
-      <div className="main-hero bg-amber-500 w-full h-full rounded-2xl p-3 md:p-4 flex flex-col relative">
+      <div className="main-hero  w-full h-full rounded-3xl p-3 md:p-4 flex flex-col relative overflow-hidden">
+        {/* Background image — same randomImage, sits behind everything */}
+        {randomImage && (
+          <Image
+            src={randomImage.src}
+            alt=""
+            fill
+            className="object-cover object-center -z-10"
+            quality={randomImage.quality}
+            priority
+          />
+        )}
+
+        {/* Dark overlay so text stays readable */}
+        <div className="absolute inset-0 bg-black/40 -z-10  backdrop-blur-sm" />
+
         {/* --- TOP / CENTER CONTENT --- */}
         <div className="font-saans font-normal text-background px-8 flex-1 flex flex-col justify-center items-center text-center">
           <p className="font-medium text-sm leading-3.5 max-w-52 mb-1">
@@ -54,35 +72,54 @@ const Hero = () => {
 
           <div className="main-text-content">
             <span className="block text-5xl md:text-7xl 2xl:text-9xl font-medium tracking-none leading-none">
-              We Create Category
+              We Create
             </span>
-            {/* <img src="null" alt="" className="mx-auto my-4" /> */}
-            <Image
-              src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-1.webp"
-              alt="Global Search Awards"
-              width={heroFrontIconWidth}
-              height={heroFrontIconHeight}
-              quality={100}
-            />
-            <span className="block text-5xl md:text-7xl font-medium 2xl:text-9xl  tracking-none leading-none mt-2">
-              Leaders
-            </span>
+
+            <div className="flex items-center justify-center gap-3 md:gap-4 2xl:gap-6">
+              <span className="text-5xl md:text-7xl 2xl:text-9xl font-medium leading-none">
+                Category
+              </span>
+              {/* <img src="null" alt="" className="mx-auto my-4" /> */}
+              {randomImage && (
+                <div className="relative shrink-0 w-15 h-15 md:w-22.5 md:h-22.5 2xl:w-32.5 2xl:h-42.5 rounded-2xl overflow-hidden">
+                  <Image
+                    src={randomImage.src}
+                    alt={randomImage.alt}
+                    fill
+                    className="object-cover object-center"
+                    quality={randomImage.quality}
+                    placeholder={randomImage.placeholder}
+                    blurDataURL={randomImage.shimmer}
+                  />
+                </div>
+              )}
+
+              <span className="block text-5xl md:text-7xl font-medium 2xl:text-9xl  tracking-none leading-none mt-2">
+                Leaders
+              </span>
+            </div>
             <p className="text-2xl md:text-2xl mt-6 font-semibold">
               on every searchable platform
             </p>
           </div>
-          <div className="on-4k-icons hidden 2xl:flex gap-3 justify-center items-center">
+          {/* hero icons below text on 1440p */}
+          <div className="on-4k-icons hidden 2xl:flex gap-7 justify-center items-center w-full">
             {heroIconsBottom.map((item, index) => (
-              <Image
+              <div
                 key={index}
-                src={item.src}
-                alt={item.alt}
-                width={item.width}
-                height={item.height}
-                quality={item.quality}
-                placeholder={item.placeholder}
-                blurDataURL={item.shimmer}
-              />
+                style={{ width: item.width, height: item.height }}
+                className="relative flex-shrink-0"
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-contain object-center"
+                  quality={item.quality}
+                  placeholder={item.placeholder}
+                  blurDataURL={item.shimmer}
+                />
+              </div>
             ))}
           </div>
         </div>

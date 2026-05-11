@@ -79,7 +79,7 @@ const MobileAccordionItem = ({ item, isOpen, toggleOpen }) => {
                 href="#"
                 className="text-xl font-medium text-background   "
               >
-                {subLink}
+                {subLink.label}
               </a>
             ))}
           </div>
@@ -94,8 +94,10 @@ const Header = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [openMobileKey, setOpenMobileKey] = useState(null); // Tracks which accordion is open
+  const [hoveredSub, setHoveredSub] = useState(null);
+  // Refs
   const headerRef = useRef(null);
-
+  const closeTimeoutRef = useRef(null);
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileOpen) {
@@ -105,7 +107,12 @@ const Header = () => {
       setOpenMobileKey(null); // Reset accordions when closing menu
     }
   }, [isMobileOpen]);
-
+  //timer for header
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
   // Animations for header visibility
   useGSAP(
     () => {
@@ -174,7 +181,18 @@ const Header = () => {
     },
     { scope: headerRef },
   );
+  const handleNavMouseEnter = () => {
+    // Cancel any pending close when re-entering
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+  };
 
+  const handleNavMouseLeave = () => {
+    // Small delay — gives mouse time to cross the gap into the dropdown
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+      setHoveredSub(null);
+    }, 100);
+  };
   const activeDesktopData = NAV_ITEMS.find(
     (item) => item.key === activeDropdown,
   );
@@ -199,55 +217,63 @@ const Header = () => {
         </div>
 
         {/* //! Desktop Nav - Hidden on Mobile */}
-        <nav
-          className="hidden lg:flex gap-8 items-center"
-          onMouseLeave={() => setActiveDropdown(null)}
+        <div
+          className="hidden lg:flex gap-8 items-center relative"
+          onMouseEnter={handleNavMouseEnter}
+          onMouseLeave={handleNavMouseLeave}
         >
-          {NAV_ITEMS.map((item) => (
-            <div key={item.key} className="relative">
-              <button
-                onMouseEnter={() => setActiveDropdown(item.key)}
-                className="text-base font-medium flex items-center gap-2 leading-relaxed"
-              >
-                {item.label} {item.sub && "+"}
-                {item.badge && (
-                  <span className="bg-emerald-200 text-black text-[10px] px-1.5 py-0.5 rounded-full absolute -top-3 -right-4">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            </div>
-          ))}
+          {/* Nav buttons — NO onMouseLeave here */}
+          <nav className="flex gap-8 items-center">
+            {NAV_ITEMS.map((item) => (
+              <div key={item.key} className="relative">
+                <button
+                  onMouseEnter={() => {
+                    handleNavMouseEnter();
+                    setActiveDropdown(item.key);
+                  }}
+                  className="text-base font-medium flex items-center gap-2 leading-relaxed"
+                >
+                  {item.label} {item.sub && "+"}
+                  {item.badge && (
+                    <span className="bg-emerald-200 text-black text-[10px] px-1.5 py-0.5 rounded-full absolute -top-3 -right-4">
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              </div>
+            ))}
+          </nav>
 
-          {/* //! Desktop Mega Menu Dropdown */}
           {activeDesktopData && activeDesktopData.sub && (
-            <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[900px] bg-white text-black p-8 rounded-2xl shadow-xl flex gap-12 cursor-default">
-              {/* Left side: Links list */}
+            <div
+              className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[900px] bg-white text-black p-8 rounded-2xl shadow-xl flex gap-12 cursor-pointer"
+              onMouseEnter={handleNavMouseEnter}
+            >
               <div className="flex-1">
                 {activeDesktopData.dropdownLabel && (
                   <p className="text-gray-500 text-sm font-normal mb-2">
                     {activeDesktopData.dropdownLabel}
                   </p>
                 )}
-
                 <div className="grid grid-cols-2 gap-y-1 gap-x-2">
                   {activeDesktopData.sub.map((subLink, idx) => (
                     <a
                       key={idx}
                       href="#"
-                      className="font-medium  text-[22px] leading-7"
+                      className="font-medium text-[22px] leading-7"
+                      onMouseEnter={() => setHoveredSub(subLink)}
+                      onMouseLeave={() => setHoveredSub(null)}
                     >
-                      {subLink}
+                      {subLink.label}
                     </a>
                   ))}
                 </div>
               </div>
-              {/* Right side: Image block */}
               <div className="w-[300px] rounded-xl overflow-hidden relative">
                 <img
-                  src={activeDesktopData.imgSrc}
-                  alt={activeDesktopData.imgAlt}
-                  className="object-cover w-full h-full"
+                  src={hoveredSub?.imgSrc ?? activeDesktopData.imgSrc}
+                  alt={hoveredSub?.label ?? activeDesktopData.imgAlt}
+                  className="object-cover w-full h-full transition-all duration-300"
                 />
                 {activeDesktopData.ctaLabel && (
                   <button className="absolute bottom-4 left-4 bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">
@@ -257,7 +283,7 @@ const Header = () => {
               </div>
             </div>
           )}
-        </nav>
+        </div>
 
         {/* Button only shows on Desktop here */}
         <div className="hidden lg:block">
