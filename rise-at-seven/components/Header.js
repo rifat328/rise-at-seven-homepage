@@ -10,7 +10,7 @@ import { TbMenu } from "react-icons/tb";
 import ChevronIcon from "./ChevronIcon";
 import Button from "@/components/Button";
 import { NAV_ITEMS } from "@/utils/navItems";
-
+import NavLinkButton from "./NavLinkButton";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // --- Mobile Accordion Sub-Component ---
@@ -246,26 +246,26 @@ const Header = () => {
 
           {activeDesktopData && activeDesktopData.sub && (
             <div
-              className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[900px] bg-white text-black p-8 rounded-2xl shadow-xl flex gap-12 cursor-pointer"
+              className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[1000px] bg-white text-black p-8 rounded-2xl shadow-xl flex gap-12 cursor-pointer justify-between"
               onMouseEnter={handleNavMouseEnter}
             >
-              <div className="flex-1">
+              <div className="mt-15 flex-1">
                 {activeDesktopData.dropdownLabel && (
                   <p className="text-gray-500 text-sm font-normal mb-2">
                     {activeDesktopData.dropdownLabel}
                   </p>
                 )}
-                <div className="grid grid-cols-2 gap-y-1 gap-x-2">
+                <div className="grid grid-cols-2 gap-y-1  ">
                   {activeDesktopData.sub.map((subLink, idx) => (
-                    <a
+                    <NavLinkButton
                       key={idx}
                       href="#"
-                      className="font-medium text-[22px] leading-7"
+                      className="font-medium text-[22px]  text-black "
                       onMouseEnter={() => setHoveredSub(subLink)}
                       onMouseLeave={() => setHoveredSub(null)}
                     >
                       {subLink.label}
-                    </a>
+                    </NavLinkButton>
                   ))}
                 </div>
               </div>
@@ -273,7 +273,7 @@ const Header = () => {
                 <img
                   src={hoveredSub?.imgSrc ?? activeDesktopData.imgSrc}
                   alt={hoveredSub?.label ?? activeDesktopData.imgAlt}
-                  className="object-cover w-full h-full transition-all duration-300"
+                  className="object-cover w-full h-full transition-all duration-300 shrink-0 "
                 />
                 {activeDesktopData.ctaLabel && (
                   <button className="absolute bottom-4 left-4 bg-black text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">

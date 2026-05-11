@@ -2,7 +2,7 @@
 import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 
-const Button = ({ classStyle, children, href }) => {
+const Button = ({ classStyle, children, href, onMouseEnter, onMouseLeave }) => {
   const btnRef = useRef(null);
   const defaultRef = useRef(null);
   const hoverRef = useRef(null);
@@ -47,9 +47,14 @@ const Button = ({ classStyle, children, href }) => {
     return () => tlRef.current?.kill();
   }, []);
 
-  const handleMouseEnter = () => tlRef.current?.play();
-  const handleMouseLeave = () => tlRef.current?.reverse();
-
+  const handleMouseEnter = () => {
+    tlRef.current?.play();
+    onMouseEnter?.();
+  };
+  const handleMouseLeave = () => {
+    tlRef.current?.reverse();
+    onMouseLeave?.(); //  call external handler if provided
+  };
   return (
     <button
       ref={btnRef}
