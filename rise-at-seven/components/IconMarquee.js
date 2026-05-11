@@ -111,7 +111,7 @@ const IconMarquee = () => {
   return (
     <div className="relative w-full overflow-hidden bg-background py-5 my-5 ">
       {/* Gradient Overlays for a polished look */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-20 flex items-center ">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-20 flex items-center flex-wrap ">
         <p className="text-xs font-medium text-foreground md:text-sm  py-1 px-2 ">
           The agency behind ...
         </p>

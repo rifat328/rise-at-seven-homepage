@@ -1,4 +1,5 @@
 "use client";
+import About from "@/components/About";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -18,6 +19,7 @@ export default function Home() {
       <div className="px-2">
         <IconMarquee />
       </div>
+      <About />
     </main>
   );
 }
