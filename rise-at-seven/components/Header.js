@@ -95,6 +95,7 @@ const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [openMobileKey, setOpenMobileKey] = useState(null); // Tracks which accordion is open
   const headerRef = useRef(null);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileOpen) {
@@ -137,7 +138,18 @@ const Header = () => {
           // B. Dynamic Top Position (The Banner Fix)
           const scrollAmount = self.scroll();
           const BANNER_PIXELS = 56; // This is the actual pixel height of h-14
-
+          const STYLE_CLASSES = [
+            "bg-white/5",
+            "backdrop-blur-md",
+            "border",
+            "border-white/10",
+            "shadow-lg",
+          ];
+          if (window.scrollY <= BANNER_PIXELS + 100) {
+            headerRef.current.classList.remove(...STYLE_CLASSES);
+          } else {
+            headerRef.current.classList.add(...STYLE_CLASSES);
+          }
           if (scrollAmount <= BANNER_PIXELS) {
             // We are still seeing the banner: stay pushed down
             gsap.to(headerRef.current, {
@@ -145,6 +157,9 @@ const Header = () => {
               duration: 0.2,
               overwrite: "auto",
             });
+            if (window.scrollY <= BANNER_PIXELS + 100) {
+              headerRef.current.classList.remove(...STYLE_CLASSES);
+            }
           } else {
             // We scrolled past the banner: float at the top
             gsap.to(headerRef.current, {
@@ -152,6 +167,7 @@ const Header = () => {
               duration: 0.2,
               overwrite: "auto",
             });
+            headerRef.current.classList.add(...STYLE_CLASSES);
           }
         },
       });
@@ -170,13 +186,13 @@ const Header = () => {
         <div className="fixed inset-0 z-30 backdrop-blur-lg  transition-all duration-300  border border-white/80 bg-transparent " />
       )}
 
-      {/* 2. Main Header Bar */}
+      {/* 2. Main Header Bar  text-[#111212]*/}
       <header
         ref={headerRef}
         className=" font-light fixed inset-x-0 mx-auto w-[98%] py-3 z-50 
              flex justify-between items-center p-2 px-6 rounded-full
-             bg-white/5 backdrop-blur-md border border-white/10 shadow-lg 
-             text-[#111212]  "
+               
+             text-white  "
       >
         <div className="w-40 z-50 relative">
           <Logo />
@@ -264,7 +280,6 @@ const Header = () => {
           )}
         </button>
       </header>
-
       {/* 3. Mobile Full-Screen Menu */}
       {isMobileOpen && (
         <div className="fixed inset-0 z-50 m-2 rounded-3xl bg-[#111]/90 text-background p-6 pt-3 flex flex-col overflow-y-auto backdrop-blur-md  ">
