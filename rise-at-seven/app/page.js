@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-
+import IconMarquee from "@/components/IconMarquee";
 export default function Home() {
   return (
     <main className="font-saans min-h-screen flex flex-col">
@@ -11,11 +11,13 @@ export default function Home() {
           🚨 The Category Leaderboard - Live Now
         </Button>
       </div>
-
       <Header />
-
       {/* Hero Content */}
       <Hero />
+      {/* Marque loop  */}
+      <div className="px-2">
+        <IconMarquee />
+      </div>
     </main>
   );
 }
