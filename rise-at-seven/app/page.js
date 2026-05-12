@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import IconMarquee from "@/components/IconMarquee";
 import FeaturedWork from "@/components/FeaturedWork";
+import OurServices from "@/components/OurServices";
+import { MoveUpRight } from "lucide-react";
 export default function Home() {
   return (
     <main className="font-saans min-h-screen ">
@@ -22,8 +24,20 @@ export default function Home() {
       </div>
       <About />
       {/* Featured Work */}
-
-      <FeaturedWork />
+      <div aria-label="FeaturedWork" className="FeaturedWork">
+        <FeaturedWork />
+        {/* Button  */}
+        <div className="flex justify-center items-center">
+          <Button
+            href="#"
+            classStyle=" font-medium py-2 px-4 flex items-center text-lg"
+          >
+            Explore Our Work <MoveUpRight size={16} />
+          </Button>
+        </div>
+      </div>
+      {/* OurServices layout */}
+      <OurServices />
     </main>
   );
 }
