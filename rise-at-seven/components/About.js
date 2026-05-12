@@ -34,7 +34,7 @@ const About = () => {
         </div>
 
         {/* buttons — bottom on mobile | right col, row 2 on md */}
-        <div className="order-3 md:col-start-2 md:row-start-2 flex gap-5 my-2">
+        <div className="order-3 md:col-start-2 md:row-start-2 flex gap-5 my-2 lg:my-6">
           <Button classStyle="font-medium px-3 py-2" href="#">
             Our Story <MoveUpRight size={16} />
           </Button>
