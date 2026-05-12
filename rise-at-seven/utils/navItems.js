@@ -264,3 +264,83 @@ export const heroMainImage = [
     shimmer: `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2U1ZTdlYiIvPjwvc3ZnPg==`,
   },
 ];
+
+export const projects = [
+  {
+    title: "SIXT",
+    img: "/image/FeaturedWork/FeaturedWork-02.webp",
+    imgHoverColor: "#CB7B3A",
+    imgHoverText: "An extra 3m clicks regionally through SEO",
+    bottomRightDesignText: "Car rental",
+  },
+  {
+    title: "Dojo - B2B",
+    img: "/image/FeaturedWork/FeaturedWork-03.webp",
+    imgHoverColor: "#FDD8C4",
+    imgHoverText: "A B2B success story for Dojo card machines",
+    bottomRightDesignText: "Card Machines",
+  },
+  {
+    title: "Magnet Trade - B2B",
+    img: "/image/FeaturedWork/FeaturedWork-04.webp",
+    imgHoverColor: "#D8C4FD",
+    imgHoverText: "A full service SEO success story 170%+ increase",
+    bottomRightDesignText: "",
+  },
+  {
+    title: "Leading E Sim brand globally",
+    img: "/image/FeaturedWork/FeaturedWork-05.webp",
+    imgHoverColor: "#CB7B3A",
+    imgHoverText: "Increasing brand and non brand visibility UK/ES",
+    bottomRightDesignText: "Esims",
+  },
+  {
+    title: "JD Sports",
+    img: "/image/FeaturedWork/FeaturedWork-06.webp",
+    imgHoverColor: "#3A8CCB",
+    imgHoverText: "65% up YoY in clicks for JDSports FR, IT, ES",
+    bottomRightDesignText: "Trainers",
+  },
+  {
+    title: "Parkdean Resorts",
+    img: "/image/FeaturedWork/FeaturedWork-07.webp",
+    imgHoverColor: "#D2B59D",
+    imgHoverText: "Dominating Google and AI search",
+    bottomRightDesignText: "Easter Breaks",
+  },
+  {
+    title: "Pooky",
+    img: "/image/FeaturedWork/FeaturedWork-12.webp",
+    imgHoverColor: "#39B0BD",
+    imgHoverText: "Driving demand for Pooky Rechargeable Lights",
+    bottomRightDesignText: "Rechargeable Lights",
+  },
+  {
+    title: "Parkdean Resorts",
+    img: "/image/FeaturedWork/FeaturedWork-08.webp",
+    imgHoverColor: "#D29DD0",
+    imgHoverText: "Social search and multi channel content to #1",
+    bottomRightDesignText: "UK holidays",
+  },
+  {
+    title: "Revolution Beauty",
+    img: "/image/FeaturedWork/FeaturedWork-09.webp",
+    imgHoverColor: "#FECACC",
+    imgHoverText: "Building the UK's leading beauty dupe brand",
+    bottomRightDesignText: "Beauty Dupes",
+  },
+  {
+    title: "Lioyds Pharmacy",
+    img: "/image/FeaturedWork/FeaturedWork-10.webp",
+    imgHoverColor: "#60DCFB",
+    imgHoverText: "Driving category leadership for STI tests",
+    bottomRightDesignText: "STI tests",
+  },
+  {
+    title: "PrettyLittleThing",
+    img: "/image/FeaturedWork/FeaturedWork-11.webp",
+    imgHoverColor: "#FECACC",
+    imgHoverText: 'Driving discovery for everything "outfits" for PLT',
+    bottomRightDesignText: "Outfits",
+  },
+];
