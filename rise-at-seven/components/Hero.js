@@ -20,7 +20,7 @@ const Hero = () => {
         {randomImage && (
           <Image
             src={randomImage.src}
-            alt=""
+            alt={randomImage.alt}
             fill
             className="object-cover object-center -z-10"
             quality={randomImage.quality}
