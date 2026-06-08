@@ -7,7 +7,6 @@ import Logo from "./Logo";
 import { CircleChevronDown, CircleChevronUp, MoveUpRight } from "lucide-react";
 import { IoCloseOutline } from "react-icons/io5";
 import { TbMenu } from "react-icons/tb";
-import ChevronIcon from "./ChevronIcon";
 import Button from "@/components/Button";
 import { NAV_ITEMS } from "@/utils/navItems";
 import NavLinkButton from "./NavLinkButton";
