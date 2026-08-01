@@ -344,3 +344,36 @@ export const projects = [
     bottomRightDesignText: "Outfits",
   },
 ];
+
+export const services = [
+  {
+    title: "Digital PR",
+    description: "Modern and responsive interfaces built for conversion.",
+    image: "/image/OurServices/ourServices-2.webp",
+  },
+  {
+    title: "Organic Social & Content",
+    description: "Fast, scalable, and clean code for your business.",
+    image: "/image/OurServices/ourServices-3.webp",
+  },
+  {
+    title: "Search & Growth Strategy",
+    description: "Improve visibility and bring more organic traffic.",
+    image: "/image/OurServices/ourServices-4.webp",
+  },
+  {
+    title: "Content Experience",
+    description: "Build a strong and memorable digital presence.",
+    image: "/image/OurServices/ourServices-7.webp",
+  },
+  {
+    title: "Data & Insights",
+    description: "Build a strong and memorable digital presence.",
+    image: "/image/OurServices/ourServices-6.webp",
+  },
+  {
+    title: "Onsite SEO",
+    description: "Build a strong and memorable digital presence.",
+    image: "/image/OurServices/ourServices-5.webp",
+  },
+];

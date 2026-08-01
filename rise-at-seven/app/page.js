@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import IconMarquee from "@/components/IconMarquee";
 import FeaturedWork from "@/components/FeaturedWork";
 import OurServices from "@/components/OurServices";
+import TextCaurasalNotAlgorithm from "@/components/TextCaurasalNotAlgorithm";
 import { MoveUpRight } from "lucide-react";
 export default function Home() {
   return (
@@ -38,6 +39,8 @@ export default function Home() {
       </div>
       {/* OurServices layout */}
       <OurServices />
+      {/* TextCaurasalNotAlgorithm */}
+      <TextCaurasalNotAlgorithm />
     </main>
   );
 }
