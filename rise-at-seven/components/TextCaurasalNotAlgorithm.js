@@ -8,22 +8,26 @@ gsap.registerPlugin(useGSAP);
 
 const MarqueeSet = () => (
   <div className="flex items-center gap-8 shrink-0 px-8 whitespace-nowrap">
-    <Image
-      src="/image/icon.png"
-      alt=""
-      width={80}
-      height={80}
-      className="shrink-0"
-    />
-    <span className="text-8xl font-medium">Chasing Consumers</span>
-    <Image
-      src="/image/icon.png"
-      alt=""
-      width={80}
-      height={80}
-      className="shrink-0"
-    />
-    <span className="text-8xl font-medium">Not Algorithms</span>
+    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-18 lg:h-18 2xl:w-24 2xl:h-24 rounded-xl overflow-hidden relative translate-y-[-10%]">
+      <Image
+        src="/image/OurServices/ourServices-1.webp"
+        alt="team context"
+        fill
+        quality={90}
+        className="object-cover"
+      />
+    </span>
+    <span className="text-8xl 2xl:text-9xl font-medium">Chasing Consumers</span>
+    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-18 lg:h-18 2xl:w-24 2xl:h-24 rounded-xl overflow-hidden relative translate-y-[-10%]">
+      <Image
+        src="/image/OurServices/ourServices-1.webp"
+        alt="team context"
+        fill
+        quality={90}
+        className="object-cover"
+      />
+    </span>
+    <span className="text-8xl 2xl:text-9xl font-medium">Not Algorithms</span>
   </div>
 );
 
@@ -76,10 +80,10 @@ const TextCaurasalNotAlgorithm = () => {
   );
 
   return (
-    <div ref={containerRef} className="overflow-hidden w-full">
-      <div ref={trackRef} className="flex w-max">
+    <div ref={containerRef} className="overflow-hidden  w-full">
+      <div ref={trackRef} className="flex w-max py-3">
         {Array.from({ length: copies }).map((_, i) => (
-          <div key={i} ref={i === 0 ? setRef : null} className="flex shrink-0">
+          <div key={i} ref={i === 0 ? setRef : null} className="flex shrink-0 ">
             <MarqueeSet />
           </div>
         ))}
