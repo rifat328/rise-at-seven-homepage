@@ -44,8 +44,8 @@ const TextCaurasalNotAlgorithm = () => {
     if (!containerRef.current || !setRef.current) return;
 
     const recalc = () => {
-      const containerWidth = containerRef.current.offsetWidth;
-      const width = setRef.current.offsetWidth;
+      const containerWidth = containerRef.current.getBoundingClientRect().width;
+      const width = setRef.current.getBoundingClientRect().width;
       if (!width) return;
       const needed = Math.ceil((containerWidth * 2) / width) + 1;
       setCopies((prev) => (prev !== needed ? needed : prev));
@@ -53,7 +53,7 @@ const TextCaurasalNotAlgorithm = () => {
     };
 
     recalc();
-
+    // ResizeObserver
     const ro = new ResizeObserver(recalc);
     ro.observe(setRef.current);
     ro.observe(containerRef.current);
