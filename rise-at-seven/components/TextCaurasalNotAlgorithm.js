@@ -7,8 +7,8 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP);
 
 const MarqueeSet = () => (
-  <div className="flex items-center gap-8 shrink-0 px-8 whitespace-nowrap">
-    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-18 lg:h-18 2xl:w-24 2xl:h-24 rounded-xl overflow-hidden relative translate-y-[-10%]">
+  <div className="flex items-center gap-8 shrink-0 px-4 whitespace-nowrap">
+    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-24 lg:h-24 2xl:w-32 2xl:h-32 rounded-xl overflow-hidden relative translate-y-[-10%]">
       <Image
         src="/image/OurServices/ourServices-1.webp"
         alt="team context"
@@ -18,7 +18,7 @@ const MarqueeSet = () => (
       />
     </span>
     <span className="text-8xl 2xl:text-9xl font-medium">Chasing Consumers</span>
-    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-18 lg:h-18 2xl:w-24 2xl:h-24 rounded-xl overflow-hidden relative translate-y-[-10%]">
+    <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-24 lg:h-24 2xl:w-32 2xl:h-32 rounded-xl overflow-hidden relative translate-y-[-10%]">
       <Image
         src="/image/OurServices/ourServices-1.webp"
         alt="team context"
