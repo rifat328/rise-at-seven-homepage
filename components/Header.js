@@ -103,9 +103,13 @@ const Header = () => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
-      setOpenMobileKey(null); // Reset accordions when closing menu
     }
   }, [isMobileOpen]);
+  // useEffect(() => {
+  //   if (!isMobileOpen) {
+  //     setOpenMobileKey(null); // Reset accordions when closing menu
+  //   }
+  // }, [isMobileOpen]);
   //timer for header
   useEffect(() => {
     return () => {
@@ -192,6 +196,17 @@ const Header = () => {
       setHoveredSub(null);
     }, 100);
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileOpen((prev) => {
+      const next = !prev;
+      if (!next) {
+        setOpenMobileKey(null); // Reset accordions when closing menu
+      }
+      return next;
+    });
+  };
+
   const activeDesktopData = NAV_ITEMS.find(
     (item) => item.key === activeDropdown,
   );
@@ -296,7 +311,7 @@ const Header = () => {
         {/* Mobile Hamburger Button */}
         <button
           className="lg:hidden z-50 relative text-sm font-bold uppercase tracking-widest"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          onClick={() => toggleMobileMenu}
         >
           {isMobileOpen ? (
             <IoCloseOutline size={28} className=" text-background" />
@@ -312,7 +327,7 @@ const Header = () => {
             <div className="sm:w-40 md:w-44">
               <Logo />
             </div>
-            <button onClick={() => setIsMobileOpen((prev) => !prev)}>
+            <button onClick={() => toggleMobileMenu}>
               <IoCloseOutline className="w-7 h-7 md:w-10 md:h-10" />
             </button>
           </div>
