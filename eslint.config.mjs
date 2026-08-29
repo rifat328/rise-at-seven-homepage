@@ -5,10 +5,14 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   // Override default ignores of eslint-config-next.
   globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
+    "node_modules/**",
+    // Ignore Next.js build output at any depth (covers nested project copies too):
+    "**/.next/**",
+    "**/out/**",
+    "**/build/**",
+    "**/coverage/**",
+    // Legacy duplicated project folder:
+    "rise-at-seven/**",
     "next-env.d.ts",
   ]),
 ]);

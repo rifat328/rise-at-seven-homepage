@@ -13,9 +13,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# next.js (any depth — covers nested project copies)
+.next/
+out/
 
 # production
 /build
