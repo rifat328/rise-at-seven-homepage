@@ -7,6 +7,7 @@ import IconMarquee from "@/components/IconMarquee";
 import FeaturedWork from "@/components/FeaturedWork";
 import OurServices from "@/components/OurServices";
 import TextCaurasalNotAlgorithm from "@/components/TextCaurasalNotAlgorithm";
+import LegacyInTheMaking from "@/components/LegacyInTheMaking";
 import { MoveUpRight } from "lucide-react";
 export default function Home() {
   return (
@@ -41,6 +42,8 @@ export default function Home() {
       <OurServices />
       {/* TextCaurasalNotAlgorithm */}
       <TextCaurasalNotAlgorithm />
+      {/* LegacyInTheMaking */}
+      <LegacyInTheMaking />
     </main>
   );
 }
