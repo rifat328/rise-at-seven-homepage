@@ -17,6 +17,7 @@ const About = () => {
                   src="/image/About/about-section-2.webp"
                   alt="women with pointing sign"
                   fill
+                  sizes="(min-width: 1536px) 80px, 48px"
                   quality={90}
                   className="object-cover"
                 />

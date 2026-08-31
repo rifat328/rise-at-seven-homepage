@@ -221,10 +221,7 @@ const Header = () => {
       {/* 2. Main Header Bar  text-[#111212]*/}
       <header
         ref={headerRef}
-        className=" font-light fixed inset-x-0 mx-auto w-[98%] py-3 z-50 
-             flex justify-between items-center p-2 px-6 rounded-full
-               
-             text-white  "
+        className="font-light fixed inset-x-0 mx-auto w-[98%] py-3 z-50 flex justify-between items-center p-2 px-6 rounded-full text-white"
       >
         <div className="w-40 z-50 relative">
           <Logo />

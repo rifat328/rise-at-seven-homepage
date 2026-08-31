@@ -80,6 +80,7 @@ const OurServices = () => {
                   src="/image/OurServices/ourServices-1.webp"
                   alt="team context"
                   fill
+                  sizes="(min-width: 1536px) 96px, (min-width: 1024px) 64px, 56px"
                   quality={90}
                   className="object-cover"
                 />

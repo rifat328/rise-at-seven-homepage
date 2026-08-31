@@ -7,9 +7,27 @@ import { heroIconsBottom, heroMainImage } from "@/utils/navItems";
 const Hero = () => {
   const heroFrontIconWidth = 35,
     heroFrontIconHeight = 20;
-  const [randomImage] = React.useState(
-    () => heroMainImage[Math.floor(Math.random() * heroMainImage.length)],
-  );
+  // Deterministic image for SSR + first paint (prevents hydration mismatch).
+  // A random hero image is picked after mount, so every visit/reload shows
+  // a different image (never the same one twice in a row).
+  const [randomImage, setRandomImage] = React.useState(heroMainImage[0]);
+
+  React.useEffect(() => {
+    // Pick + swap the hero image right after first paint. Deferred via rAF so
+    // we never call setState synchronously inside the effect.
+    const frame = window.requestAnimationFrame(() => {
+      if (heroMainImage.length < 2) return;
+      const stored = window.localStorage.getItem("heroImageIndex");
+      const lastIndex = stored === null ? -1 : Number(stored);
+      const candidates = heroMainImage
+        .map((img, index) => ({ img, index }))
+        .filter((entry) => entry.index !== lastIndex);
+      const pick = candidates[Math.floor(Math.random() * candidates.length)];
+      window.localStorage.setItem("heroImageIndex", String(pick.index));
+      setRandomImage(pick.img);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
   return (
     <section
       aria-label="Hero section, top of the page"
@@ -22,6 +40,7 @@ const Hero = () => {
             src={randomImage.src}
             alt={randomImage.alt}
             fill
+            sizes="100vw"
             className="object-cover object-center -z-10"
             quality={randomImage.quality}
             priority
@@ -39,34 +58,54 @@ const Hero = () => {
 
           <div className="branding-icons my-4 flex gap-3 ">
             <LeafLeft />
-            <Image
-              src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-1.webp"
-              alt="Global Search Awards"
-              width={heroFrontIconWidth}
-              height={heroFrontIconHeight}
-              quality={100}
-            />
-            <Image
-              src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-2.webp"
-              alt="The Drum"
-              width={heroFrontIconWidth}
-              height={heroFrontIconHeight}
-              quality={100}
-            />
-            <Image
-              src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-3.webp"
-              alt="UK social Media Awards"
-              width={heroFrontIconWidth}
-              height={heroFrontIconHeight}
-              quality={100}
-            />
-            <Image
-              src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-4.webp"
-              alt="UK Content Awards"
-              width={heroFrontIconWidth}
-              height={heroFrontIconHeight}
-              quality={100}
-            />
+            <div
+              style={{ width: heroFrontIconWidth, height: heroFrontIconHeight }}
+              className="relative shrink-0"
+            >
+              <Image
+                src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-1.webp"
+                alt="Global Search Awards"
+                fill
+                sizes="35px"
+                quality={100}
+              />
+            </div>
+            <div
+              style={{ width: heroFrontIconWidth, height: heroFrontIconHeight }}
+              className="relative shrink-0"
+            >
+              <Image
+                src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-2.webp"
+                alt="The Drum"
+                fill
+                sizes="35px"
+                quality={100}
+              />
+            </div>
+            <div
+              style={{ width: heroFrontIconWidth, height: heroFrontIconHeight }}
+              className="relative shrink-0"
+            >
+              <Image
+                src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-3.webp"
+                alt="UK social Media Awards"
+                fill
+                sizes="35px"
+                quality={100}
+              />
+            </div>
+            <div
+              style={{ width: heroFrontIconWidth, height: heroFrontIconHeight }}
+              className="relative shrink-0"
+            >
+              <Image
+                src="/image/Hero/heroFrontTopMiddleIcon/HeroFront-TopMiddleIcon-4.webp"
+                alt="UK Content Awards"
+                fill
+                sizes="35px"
+                quality={100}
+              />
+            </div>
             <LeafRight />
           </div>
 
@@ -86,6 +125,7 @@ const Hero = () => {
                     src={randomImage.src}
                     alt={randomImage.alt}
                     fill
+                    sizes="(min-width: 1536px) 130px, (min-width: 768px) 90px, 60px"
                     className="object-cover object-center"
                     quality={randomImage.quality}
                     placeholder={randomImage.placeholder}
@@ -114,6 +154,7 @@ const Hero = () => {
                   src={item.src}
                   alt={item.alt}
                   fill
+                  sizes={item.width + 'px'}
                   className="object-contain object-center"
                   quality={item.quality}
                   placeholder={item.placeholder}

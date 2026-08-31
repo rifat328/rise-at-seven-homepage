@@ -13,6 +13,7 @@ const MarqueeSet = () => (
         src="/image/OurServices/ourServices-1.webp"
         alt="team context"
         fill
+        sizes="(min-width: 1536px) 128px, (min-width: 1024px) 96px, 56px"
         quality={90}
         className="object-cover"
       />
@@ -23,6 +24,7 @@ const MarqueeSet = () => (
         src="/image/OurServices/ourServices-1.webp"
         alt="team context"
         fill
+        sizes="(min-width: 1536px) 128px, (min-width: 1024px) 96px, 56px"
         quality={90}
         className="object-cover"
       />
