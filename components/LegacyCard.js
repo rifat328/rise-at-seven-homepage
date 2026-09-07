@@ -10,7 +10,7 @@ const LegacyCard = ({
 }) => {
   return (
     <div
-      className="w-full h-full m-1.5 p-2 rounded-2xl "
+      className="relative w-full h-full m-1.5 p-2 rounded-2xl overflow-hidden"
       style={{ backgroundColor: bgColor || "#f5f5f5" }}
     >
       <Image
@@ -19,10 +19,12 @@ const LegacyCard = ({
         fill
         placeholder="blur"
         blurDataURL={cardImage}
-        className="rounded-2xl"
+        className="rounded-2xl object-cover"
       />
-      <h1>{cardHeading}</h1>
-      <p>{cardDescription}</p>
+      <div className="relative z-10">
+        <h1>{cardHeading}</h1>
+        <p>{cardDescription}</p>
+      </div>
     </div>
   );
 };
