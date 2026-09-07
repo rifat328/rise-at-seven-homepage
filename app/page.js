@@ -8,6 +8,7 @@ import FeaturedWork from "@/components/FeaturedWork";
 import OurServices from "@/components/OurServices";
 import TextCaurasalNotAlgorithm from "@/components/TextCaurasalNotAlgorithm";
 import LegacyInTheMaking from "@/components/LegacyInTheMaking";
+import Footer from "@/components/Footer";
 import { MoveUpRight } from "lucide-react";
 export default function Home() {
   return (
@@ -44,6 +45,8 @@ export default function Home() {
       <TextCaurasalNotAlgorithm />
       {/* LegacyInTheMaking */}
       <LegacyInTheMaking />
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }
