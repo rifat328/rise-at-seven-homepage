@@ -83,7 +83,7 @@ const TextCaurasalNotAlgorithm = () => {
 
   return (
     <div ref={containerRef} className="overflow-hidden  w-full">
-      <div ref={trackRef} className="flex w-max py-3">
+      <div ref={trackRef} className="flex w-max py-3 my-3">
         {Array.from({ length: copies }).map((_, i) => (
           <div key={i} ref={i === 0 ? setRef : null} className="flex shrink-0 ">
             <MarqueeSet />
