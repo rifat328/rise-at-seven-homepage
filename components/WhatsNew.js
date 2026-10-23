@@ -33,10 +33,10 @@ const WhatsNew = () => {
     },
   ];
   return (
-    <section>
-      <div className="heading">
+    <section className=" w-full  mb-5 p-4">
+      <div className="heading pt-3">
         <h2 className="font-medium text-6xl md:text-7xl 2xl:text-[100px] leading-[54px] 2xl:leading-24 p-2">
-          What&apos;s
+          What's
           <span className="inline-block align-bottom mx-1 shrink-0 w-14 h-14 lg:w-16 lg:h-16 2xl:w-24 2xl:h-24 rounded-xl overflow-hidden relative translate-y-[-10%]">
             <Image
               src="/image/WhatsNew/whatsNew2.webp"
@@ -49,10 +49,7 @@ const WhatsNew = () => {
           </span>
           New
         </h2>
-        {/* All the Cards */}
-        {cards.map((card, index) => (
-          <WhatsNewCard key={index} card={card} />
-        ))}
+
         {/* mobile BUTTON: Visible only on sm , from md it vanishes */}
         <div className=" md:hidden">
           <Button classStyle=" px-4 py-3  font-saans font-medium text-base ">
@@ -61,7 +58,12 @@ const WhatsNew = () => {
           </Button>
         </div>
       </div>
-      <div className="contentCards"></div>
+      <div className="contentCards flex gap-6  overflow-visible overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-px-4">
+        {/* All the Cards */}
+        {cards.map((card, index) => (
+          <WhatsNewCard key={index} card={card} />
+        ))}
+      </div>
     </section>
   );
 };
