@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import WhatsNewCard from "./WhatsNewCard";
 import Button from "./Button";
 import { MoveUpRight } from "lucide-react";
@@ -32,6 +32,58 @@ const WhatsNew = () => {
       heading: "Organic vs Paid in AI Search? You're Asking the Wrong Question",
     },
   ];
+
+  const contentCardsRef = useRef(null);
+
+  // Handle mouse drag functionality for horizontal scrolling
+  useEffect(() => {
+    const contentCardsElement = contentCardsRef.current;
+    if (!contentCardsElement) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const handleMouseDown = (e) => {
+      isDragging = true;
+      contentCardsElement.classList.add("active");
+      startX = e.pageX - contentCardsElement.offsetLeft;
+      scrollLeft = contentCardsElement.scrollLeft;
+    };
+
+    const handleMouseLeave = () => {
+      isDragging = false;
+      contentCardsElement.classList.remove("active");
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      contentCardsElement.classList.remove("active");
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - contentCardsElement.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      contentCardsElement.scrollLeft = scrollLeft - walk;
+    };
+
+    // Add event listeners
+    contentCardsElement.addEventListener("mousedown", handleMouseDown);
+    contentCardsElement.addEventListener("mouseleave", handleMouseLeave);
+    contentCardsElement.addEventListener("mouseup", handleMouseUp);
+    contentCardsElement.addEventListener("mousemove", handleMouseMove);
+
+    // Cleanup
+    return () => {
+      contentCardsElement.removeEventListener("mousedown", handleMouseDown);
+      contentCardsElement.removeEventListener("mouseleave", handleMouseLeave);
+      contentCardsElement.removeEventListener("mouseup", handleMouseUp);
+      contentCardsElement.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
     <section className=" w-full  mb-5 p-4">
       <div className="heading pt-3">
@@ -58,7 +110,10 @@ const WhatsNew = () => {
           </Button>
         </div>
       </div>
-      <div className="contentCards flex gap-6  overflow-visible overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-px-4">
+      <div
+        ref={contentCardsRef}
+        className="contentCards flex gap-6  overflow-visible overflow-x-auto snap-x snap-mandatory scroll-smooth scroll-px-4 no-scrollbar cursor-grab active:cursor-grabbing"
+      >
         {/* All the Cards */}
         {cards.map((card, index) => (
           <WhatsNewCard key={index} card={card} />

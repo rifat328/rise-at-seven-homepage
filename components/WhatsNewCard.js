@@ -5,7 +5,7 @@ const WhatsNewCard = ({ card }) => {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="relative overflow-hidden rounded-[24px] cursor-pointer group shrink-0 snap-start w-[300px] md:w-[380px] h-[50vh]"
+      className="relative overflow-hidden rounded-[24px] cursor-pointer group shrink-0 snap-start w-[80vw] md:w-[45vw] h-[50vh] md:h-[25vh]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -14,7 +14,7 @@ const WhatsNewCard = ({ card }) => {
         <img
           src={card.src}
           alt={card.alt}
-          className="w-full h-[50vh] object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105"
         />
 
         {/* CIRCULAR OVERLAY */}

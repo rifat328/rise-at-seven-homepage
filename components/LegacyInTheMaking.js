@@ -24,18 +24,16 @@ We're on a mission to be the first search-first agency to win a Cannes Lion disr
     },
     {
       src: "/image/LegacyInMaking/LegacyInMaking-WhatsNew5.webp",
-      alt: "Pioneers",
-      heading: "Pioneers",
-      description: `We're dedicated to creating the industry narrative that others follow 3 years from now. We paved the path for creative SEO, multi-channel search with Digital PR, and Social Search and we will continue to do it.
-We're on a mission to be the first search-first agency to win a Cannes Lion disrupting the status quo.`,
+      alt: "Award Winning",
+      heading: "Award Winning",
+      description: `A roll top bath full of 79 awards. Voted The Drum's best agency outside of London. We are official judges for industry awards including Global Search Awards and Global Content Marketing Awards.`,
       bgColor: "#B2F6E3",
     },
     {
       src: "/image/LegacyInMaking/LegacyInMaking-WhatsNew2.webp",
-      alt: "Pioneers",
-      heading: "Pioneers",
-      description: `We're dedicated to creating the industry narrative that others follow 3 years from now. We paved the path for creative SEO, multi-channel search with Digital PR, and Social Search and we will continue to do it.
-We're on a mission to be the first search-first agency to win a Cannes Lion disrupting the status quo.`,
+      alt: "Speed",
+      heading: "Speed",
+      description: `People ask us why we are called Rise at Seven? Ever heard the saying Early Bird catches the worm? Google is moving fast, but humans are moving faster. We chase consumers, not algorithms. We’ve created a service which takes ideas to result within 60 minutes.`,
       bgColor: "#FFFFFF",
     },
   ];
