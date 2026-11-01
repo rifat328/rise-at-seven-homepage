@@ -16,7 +16,7 @@ const LegacyCard = ({
         lg:absolute lg:inset-0 lg:w-full lg:h-full lg:max-w-none  ${className}`}
       style={{ backgroundColor: bgColor || "#f5f5f5" }}
     >
-      <div className="relative w-full h-60 rounded-xl overflow-hidden mb-4">
+      <div className="relative w-full h-60 rounded-xl overflow-hidden mb-4 lg:w-50 lg:h-50">
         <Image
           src={cardImage}
           alt={cardImageAlt}
@@ -29,12 +29,12 @@ const LegacyCard = ({
 
       <div className="relative z-10 flex flex-col justify-center items-center text-center">
         <h1
-          className={`py-5 text-3xl font-medium ${isDark ? "text-white" : "text-black"}`}
+          className={`py-5 text-3xl lg:text-5xl font-medium ${isDark ? "text-white" : "text-black"}`}
         >
           {cardHeading}
         </h1>
         <p
-          className={`pb-2 text-[14px] md:text-base lg:text-xl font-medium ${isDark ? "text-white/80" : "text-gray-700"}`}
+          className={`pb-2 text-sm md:text-base lg:text-base font-medium ${isDark ? "text-white/90" : "text-gray-700"}`}
         >
           {cardDescription}
         </p>
